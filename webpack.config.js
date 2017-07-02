@@ -1,13 +1,13 @@
-var webpack = require('webpack');
-var path = require('path');
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
-var PurifyCSSPlugin = require('purifycss-webpack');
-var glob = require('glob');
-var CleanWebpackPlugin = require('clean-webpack-plugin');
-var ManifestPlugin = require('webpack-manifest-plugin');
+let webpack = require('webpack');
+let path = require('path');
+let ExtractTextPlugin = require('extract-text-webpack-plugin');
+let PurifyCSSPlugin = require('purifycss-webpack');
+let glob = require('glob');
+let CleanWebpackPlugin = require('clean-webpack-plugin');
+let ManifestPlugin = require('webpack-manifest-plugin');
 
 
-var isProd = (process.env.NODE_ENV === 'production');
+let isProd = (process.env.NODE_ENV === 'production');
 
 module.exports = {
 	// entry: './assets/app.js',
@@ -64,7 +64,7 @@ module.exports = {
 		new PurifyCSSPlugin({
 			paths: glob.sync(path.join(__dirname, 'views/**/*.hbs')),
 			minimize: isProd
-    	}),
+		}),
 		new ManifestPlugin()
 	]
 };
