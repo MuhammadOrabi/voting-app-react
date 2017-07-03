@@ -1,0 +1,31 @@
+<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-lg" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="loginModalLabel">Login</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body container-fluid">
+				<form class="form-inline" action="/users/login" method="POST">
+					<label class="sr-only" for="username">Username</label>
+					<input type="text" class="form-control mb-2 mr-sm-2 mb-sm-0" id="username" name="username"
+						placeholder="Jane Doe">
+					<label class="sr-only" for="password">Username</label>
+					<input type="password" class="form-control mb-2 mr-sm-2 mb-sm-0" id="password" name="password" 
+						placeholder="Password">
+					<div class="form-check mb-2 mr-sm-2 mb-sm-0">
+						<label class="form-check-label">
+							<input class="form-check-input" type="checkbox"> Remember me
+						</label>
+					</div>
+  					<button type="submit" class="btn btn-primary">Login</button>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+			</div>
+		</div>
+	</div>
+</div>

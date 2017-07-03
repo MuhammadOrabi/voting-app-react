@@ -1,0 +1,26 @@
+<div class="modal fade" id="registerModal" tabindex="-1" role="dialog" aria-labelledby="registerModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-lg" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="registerModalLabel">Register</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body container-fluid">
+				<form class="form-inline" action="/users/register" method="POST">
+					<label class="sr-only" for="username">Username</label>
+					<input type="text" class="form-control mb-2 mr-sm-2 mb-sm-0" id="username" name="username" 
+						placeholder="Jane Doe">
+					<label class="sr-only" for="password">Username</label>
+					<input type="password" class="form-control mb-2 mr-sm-2 mb-sm-0" id="password" id="password" name="password"
+						placeholder="Password">
+					<button type="submit" class="btn btn-primary">Register</button>
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+			</div>
+		</div>
+	</div>
+</div>

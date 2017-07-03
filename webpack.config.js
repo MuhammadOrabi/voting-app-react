@@ -18,7 +18,7 @@ module.exports = {
 		]
 	},
 	output: {
-		filename: '[name].[chunkhash].js',
+		filename: '[name].js',
 		path: path.resolve(__dirname, 'public'),
 	},
 	module: {
@@ -57,15 +57,10 @@ module.exports = {
 			verbose: true,
 			dry: false
 		}),
-		new ExtractTextPlugin('[name].[chunkhash].css'),
+		new ExtractTextPlugin('[name].css'),
 		new webpack.LoaderOptionsPlugin({
 			minimize: isProd
-		}),
-		new PurifyCSSPlugin({
-			paths: glob.sync(path.join(__dirname, 'views/**/*.hbs')),
-			minimize: isProd
-		}),
-		new ManifestPlugin()
+		})
 	]
 };
 

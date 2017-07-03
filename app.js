@@ -4,7 +4,8 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var manifest = require('express-manifest');
+var session = require('express-session')
+var hbs = require('hbs');
 var mongoose = require('mongoose');
 var passport = require('passport');
 var localStrategy = require('passport-local').Strategy;
@@ -20,25 +21,28 @@ db.once('open', function() {
 
 var index = require('./routes/index');
 var users = require('./routes/users');
+var polls = require('./routes/polls');
 
 var app = express();
 
 // view engine setup
+hbs.registerPartials(__dirname + '/views/partials');
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
 
-app.use(manifest({
-	manifest: path.join(__dirname, 'public') + '/manifest.json',
-	prepend: path.join(__dirname, 'public'),
-	reqPathFind: /^(\/?)/,
-	reqPathReplace: ''
-}));
+
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+
+app.use(session({
+	secret: config.key,
+	resave: false,
+	saveUninitialized: true
+}));
 
 var User = require('./models/user');
 app.use(passport.initialize());
@@ -50,6 +54,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
 app.use('/users', users);
+app.use('/polls', polls);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

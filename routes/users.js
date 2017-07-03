@@ -13,10 +13,12 @@ router.get('/', (req, res, next) => {
 router.post('/register', (req, res, next) => {
 	User.register(new User({username: req.body.username}), req.body.password, (err, user) => {
 		if (err) {
-			return res.status(500).json({err: err});
+			req.session.msg = {type: 'alert-danger', msg: err};
+			return res.redirect('/');
 		}
 		passport.authenticate('local')(req, res, () => {
-			return res.status(200).json({status: 'Regitered Successfully!'});
+			req.session.msg = {type: 'alert-success', msg: {name: '', message: 'Regitered Successfully!'}};
+			return res.redirect('/');
 		});
 	});
 });
@@ -24,22 +26,28 @@ router.post('/register', (req, res, next) => {
 router.post('/login', (req, res, next) => {
 	passport.authenticate('local', (err, user, info) => {
 		if (err) {
-			return res.status(500).json({err: err}); 
+			req.session.msg = {type: 'alert-danger', msg: err};
+			return res.redirect('/');
 		}
 		if (!user) {
-			return res.status(401).json({err: info});
+			req.session.msg = {type: 'alert-danger', msg: info};
+			return res.redirect('/');
 		}
 		req.logIn(user, (err) => {
-			if (err) return res.status(500).json({err: 'couldn\'t log in user!'});
-			let token = getToken(user);
-			res.status(200).json({token: token, success: true});
+			if (err) {
+				req.session.msg = {type: 'alert-danger', msg: err};
+				return res.redirect('/');
+			}
+			req.session.token = getToken(user);
+			return res.redirect('/profile');
 		});
 	})(req, res, next);
 });
 
 router.get('/logout', verifyUser, (req, res, next) => {
 	req.logout();
-	res.status(200).json();	
+	req.session.token = null;
+	return res.redirect('/');
 });
 
 module.exports = router;
