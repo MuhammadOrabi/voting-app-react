@@ -37,7 +37,12 @@ export default class App extends React.Component {
 		}
 
 		axios.post('/polls', {poll: this.state.poll, options: this.state.options})
-		.then((res) => console.log(res))
+		.then((res) => {
+			this.setState({
+				poll: '',
+				options: [{name: ''}, {name: ''}]
+			})
+		})
 		.catch((err) => console.log(err))
 	}
 	render() {
