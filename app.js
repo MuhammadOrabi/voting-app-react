@@ -10,6 +10,7 @@ var mongoose = require('mongoose');
 var passport = require('passport');
 var localStrategy = require('passport-local').Strategy;
 
+
 var config = require('./config.js');
 
 mongoose.connect(config.url);
